@@ -61,7 +61,7 @@ $autoload['packages'] = array();
 */
 
 $autoload['libraries'] = array(
-	'form_validation', 'session', 'database'
+	'form_validation', 'session', 'database', 'directory', 'session'
 	);
 
 
@@ -93,7 +93,7 @@ $autoload['drivers'] = array(
 */
 
 $autoload['helper'] = array(
-		'url', 'form'
+		'url', 'form',
 	);
 
 

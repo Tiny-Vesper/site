@@ -10,11 +10,9 @@ class Index extends CI_Controller {
 	}
 	public function index()
 	{
-		// $this->load->view('login');
-		// echo site_url();
-
-		
-
+		$this->load->view('index');
+		// echo base_url();
 	}
+	
 
 }

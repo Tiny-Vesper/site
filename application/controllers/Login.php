@@ -1,5 +1,5 @@
 <?php
-// defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Login extends CI_Controller {
 
@@ -10,17 +10,24 @@ class Login extends CI_Controller {
 	}
 	public function index()
 	{
-		echo site_url();
-	}
-	public function login()
-	{
 		$this->load->view('login');
+	}
+	public function logout()
+	{
+		$this->session->set_userdata('logged_in', false);
+
+		redirect('Index/index');
+		// $this->load->view('index');
 	}
 	public function solveLoginInfo()
 	{
 		$post = $this->input->post();
 
-		$query_cmd = 'SELECT * FROM site_user WHERE username ='.$post['username'];
+		// var_dump($post);
+
+		$query_cmd = 'SELECT * FROM site_user WHERE username = \''.$post['username'].'\'';
+
+		// var_dump($query_cmd);
 
 		$query = $this->db->query($query_cmd);
 
@@ -29,7 +36,17 @@ class Login extends CI_Controller {
 		}
 		else{
 			if(md5($post['password']) == $query->row_array()['password']){
-				$this->load->view('login-successful');
+
+				$data = array(
+						'username' => $post['username'],
+						'logged_in' => true,
+					);
+				$this->session->set_userdata($data);
+
+				// $this->load->view('index');
+
+				redirect('Index/index');
+
 			}
 			else{
 				show_error('wrong password');
@@ -37,34 +54,5 @@ class Login extends CI_Controller {
 		}
 
 	}
-	public function register()
-	{
-		$this->load->view('register');
-
-	}
-	public function solveRigisterInfo()
-	{
-		$post = $this->input->post();
-
-		$query_cmd = 'SELECT * FROM site_user WHERE username ='.$post['username'];
-
-		$query = $this->db->query($query_cmd);
-
-		if($query->num_rows() >= 1){
-			show_error('username existed');
-		}
-		else{
-			if($post['password'] != $post['con_password']){
-				show_error('two password are not matched');
-			}
-			$data_to_insert = array(
-					'username' => $post['username'],
-					'password' => md5($post['password']),
-					'register_time' => time(),
-				);	
-			$this->db->insert('user', $data_to_insert);
-			$this->load->view('login-successful');
-		}
-	}
-
+	
 }
