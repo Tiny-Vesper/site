@@ -10,7 +10,7 @@ class Index extends CI_Controller {
 	}
 	public function index()
 	{
-		$query_cmd = 'SELECT * FROM site_article ORDER BY time';
+		$query_cmd = 'SELECT * FROM site_article ORDER BY time DESC';
 
 		$data = $this->db->query($query_cmd)->result_array();
 
@@ -33,18 +33,18 @@ class Index extends CI_Controller {
 			redirect('Index/index');
 		}
 
-
-		
-
 	}
 	public function solveIssueArticle()
 	{
+		if($this->session->userdata('logged_in') == false){
+			show_error('Please login first');
+		}
 		$post = $this->input->post();
 
 		$data = array(
 			'content' => $post['content'], 
 			'user'    => $this->session->userdata('username'),
-			'time'    =>  time(oid),
+			'time'    =>  date('y-m-d h:m:s', time(void)),
 			);
 
 		$this->db->insert('article', $data);

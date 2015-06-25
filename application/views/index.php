@@ -24,7 +24,6 @@
          position:fixed;
          bottom: 50px;
          left: 33%;
-
       }
       .article-container{
         margin: 2 230px;
@@ -43,7 +42,7 @@
   <body >
     <div class="article-container">
 
-    <?php foreach ($data as $value) { 
+    <?php foreach ($data as $item) { 
         // var_dump($value);
         // echo $value['username'];
         // var_dump($value['content']);
@@ -52,15 +51,16 @@
       <div class="panel panel-default panel-info" >
       <div class="panel-heading">
       <h3 class="panel-title">
-      <?php echo $value['user'].'-';?>
+      <?php echo $item['user'].'-'.$item['time'];?>
       </h3>
       <form method="POST" action="<?php echo site_url()?>/Index/deleteRecorde" >
-      <input value="<?=$value['id']?>" name="id" type="hidden"/>
+      <input value="<?=$item['id']?>" name="id" type="hidden"/>
       <button class="delete-button btn btn-default" type="submit">Delete</button>
       </form>
       </div>
       <div class="panel-body">
-      <?php echo $value['content'];?>
+      <?php echo $item['content'];?>
+
       </div>
       </div>
 <?php } ?>
