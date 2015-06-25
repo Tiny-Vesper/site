@@ -18,28 +18,72 @@
       <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+    <style type="text/css">
+      .input-container{
+         position:fixed;
+         bottom: 50px;
+         left: 33%;
+
+      }
+      .article-container{
+        margin: 2 230px;
+      }
+      body{
+        margin-top:70px;
+        /*position: absolute;*/
+      }
+      .delete-button{
+        float: right;
+      }
+    </style>
+
+
   </head>
-  <body>
-    <h1>你好，世界！</h1>
+  <body >
+    <div class="article-container">
+
+    <?php foreach ($data as $value) { 
+        // var_dump($value);
+        // echo $value['username'];
+        // var_dump($value['content']);
+      ?>
+      
+      <div class="panel panel-default panel-info" >
+      <div class="panel-heading">
+      <h3 class="panel-title">
+      <?php echo $value['user'].'-';?>
+      </h3>
+      <form method="POST" action="<?php echo site_url()?>/Index/deleteRecorde" >
+      <input value="<?=$value['id']?>" name="id" type="hidden"/>
+      <button class="delete-button btn btn-default" type="submit">Delete</button>
+      </form>
+      </div>
+      <div class="panel-body">
+      <?php echo $value['content'];?>
+      </div>
+      </div>
+<?php } ?>
+
+    </div>
 
 
 
 
+    <div class="input-container">
+      <form action="<?php echo site_url(); ?>/Index/solveIssueArticle" method="POST">
+      <div class="col-lg-6">
+          <div class="input-group">
+            <input type="text" class="form-control" name="content" placeholder="input what you want to say" required>
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="submit">Issue</button>
+            </span>
+          </div><!-- /input-group -->
+        </div><!-- /.col-lg-6 -->
+      </form>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+    </div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
@@ -48,12 +92,3 @@
   </body>
 </html>
 
-
-  <div class="col-lg-6">
-    <div class="input-group">
-      <span class="input-group-addon">
-        <input type="checkbox" aria-label="...">
-      </span>
-      <input type="text" class="form-control" aria-label="...">
-    </div>
-  </div>

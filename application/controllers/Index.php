@@ -10,9 +10,47 @@ class Index extends CI_Controller {
 	}
 	public function index()
 	{
-		$this->load->view('index');
+		$query_cmd = 'SELECT * FROM site_article ORDER BY time';
+
+		$data = $this->db->query($query_cmd)->result_array();
+
+		$this->load->view('index', array('data'=>$data));
+		// var_dump(array('data'=>$data));
 		// echo base_url();
 	}
-	
+	public function deleteRecorde(	)
+	{
+		# code...
+
+		if($this->session->userdata('username') != 'admin'){
+			show_error('Pemission denied, please login with admin account then try again');
+		}
+		else{
+			$post = $this->input->post();
+
+			$this->db->delete('article', array('id' => $post['id'])); 
+			
+			redirect('Index/index');
+		}
+
+
+		
+
+	}
+	public function solveIssueArticle()
+	{
+		$post = $this->input->post();
+
+		$data = array(
+			'content' => $post['content'], 
+			'user'    => $this->session->userdata('username'),
+			'time'    =>  time(oid),
+			);
+
+		$this->db->insert('article', $data);
+
+		redirect('Index/index');
+
+	}
 
 }
