@@ -53,4 +53,19 @@ class Index extends CI_Controller {
 
 	}
 
+	public function search()
+	{
+		# code...
+		$post = $this->input->post();
+		if($post == null){
+			$this->index();
+		}
+
+		$query_cmd = 'SELECT * FROM site_article  WHERE user LIKE \''. $post['keyword'].'\' ORDER BY time DESC';
+
+		$data = $this->db->query($query_cmd)->result_array();
+
+		$this->load->view('index', array('data'=>$data));
+
+	}
 }

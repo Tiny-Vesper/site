@@ -35,12 +35,34 @@
       .delete-button{
         float: right;
       }
+      .href-bottom{
+        margin-left: 10px;
+        margin-bottom: 10px;
+
+      }
     </style>
 
 
   </head>
   <body >
     <div class="article-container">
+
+    <?php 
+      if(count($data)  == 0){
+         ?>
+      
+      <div class="jumbotron">
+        <h1>Welcome here.</h1>
+        <p>there is no message...</p>
+        <p>you can leave your message here</p>
+        <p>but you should login first.</p>
+        <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
+      </div>
+  
+         <?php
+      }
+      else{
+    ?>
 
     <?php foreach ($data as $item) { 
         // var_dump($value);
@@ -60,15 +82,26 @@
       </div>
       <div class="panel-body">
       <?php echo $item['content'];?>
+      
+      </div>
+      
+      <div class="href-bottom">
+        <div class="btn-group" role="group" aria-label="...">
+          <button type="button" class="btn btn-default">Reply</button>
+          <button type="button" class="btn btn-default">Thanks</button>
+          <button type="button" class="btn btn-default">Favorite</button>
+        </div>
+      </div>
+        
+      <div>
 
       </div>
+
+
       </div>
-<?php } ?>
+<?php } }?>
 
     </div>
-
-
-
 
     <div class="input-container">
       <form action="<?php echo site_url(); ?>/Index/solveIssueArticle" method="POST">
@@ -92,3 +125,4 @@
   </body>
 </html>
 
+<br/><br/><br/><br/><br/><br/><br/>

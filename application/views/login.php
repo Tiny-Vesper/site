@@ -41,10 +41,8 @@
         <div class="checkbox">
         </div>
         <div>
-	        <button class="btn btn-lg btn-primary " style="width:135px" type="submit">Sign in</button>
-	        <a href="<?php echo site_url() ?>/Register/index">
-		        <button class="btn btn-lg btn-primary " style="width:135px">Sign up</button>
-	        </a>
+	        <button class="btn btn-lg btn-primary " style="width:280px" type="submit">Sign in</button>
+	        
 	    </div>
       </form>
 

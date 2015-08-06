@@ -32,7 +32,7 @@ class Register extends CI_Controller {
 			$data_to_insert = array(
 					'username' => $post['username'],
 					'password' => md5($post['password']),
-					'register_time' => time(),
+					'register_time' => date('Y-M-D h:m:s', time()),
 				);	
 			$this->db->insert('user', $data_to_insert);
 			// $this->load->view('login-successful');
